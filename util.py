@@ -13,7 +13,7 @@ def read_csv_dataset(path_to_dataset: str) -> np.array:
     return capacity
 
 
-def plotting(x: np.ndarray, data: dict, save: bool = False):
+def plotting(x: np.ndarray, data: dict, path_to_save: str|None = None):
     """ Отображение деградации ёмкости """
     for temp in data.keys():
         plt.plot(x, data[temp], label=f"T={temp}К, U=2.9В")
@@ -22,14 +22,15 @@ def plotting(x: np.ndarray, data: dict, save: bool = False):
     plt.xlabel("t, ч")
     plt.ylabel("C, нФ")
     plt.legend()
-    if save:
-        plt.savefig("degradation_capacity_area.png", dpi=300, bbox_inches='tight')
+    if path_to_save is not None:
+        plt.savefig(f"{path_to_save}", dpi=300, bbox_inches='tight')
     plt.show()
 
 
 def plotting_compare(
     time: np.ndarray,
-    experiment_data: dict, model_data: dict
+    experiment_data: dict, model_data: dict,
+    path_to_save: str|None = None
 ) -> None:
     """ Отображение графиков модели и эксперимента на одном рисунке """
     colors = ["b", "orange", "g"]
@@ -41,6 +42,8 @@ def plotting_compare(
     plt.xlabel("t, час")
     plt.ylabel("C, нФ")
     plt.legend()
+    if path_to_save is not None:
+        plt.savefig(f"{path_to_save}", dpi=300, bbox_inches='tight')
     plt.show()
 
 def get_model_accuracy(data_true: dict[int: np.ndarray], data_pred: dict[int: np.ndarray]):
