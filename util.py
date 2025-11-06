@@ -42,3 +42,16 @@ def plotting_compare(
     plt.ylabel("C, нФ")
     plt.legend()
     plt.show()
+
+def get_model_accuracy(data_true: dict[int: np.ndarray], data_pred: dict[int: np.ndarray]):
+    """ Получение точности модели """
+    assert data_pred.keys() == data_true.keys(), "Разные ключи словарей"
+    accuracy_data = {}
+    for temp in data_true.keys():
+        assert data_true[temp].shape == data_pred[temp].shape, "Разный размер массивов"
+
+        dc = np.abs((data_true[temp] - data_pred[temp]) / data_true[temp] * 100)
+        dc = np.round(dc, 2)
+        accuracy_data[temp] = [np.min(dc), np.max(dc)]
+
+    return accuracy_data
