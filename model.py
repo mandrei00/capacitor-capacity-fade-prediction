@@ -59,12 +59,3 @@ class CapacityDegradationModel:
             d_c = d_c0 * np.exp(-self.e_a / (self.K_BOLZ * temperature))
             model_data[temperature] = c_0[temperature] * (1 + d_c * time)
         return model_data
-
-    # def predict_(self, time: np.ndarray, model_data: dict):
-    #     """ Предсказание кривой ёмкости в зависимости от времени """
-    #     for temperature in model_data.keys():
-    #         # # расчёт удельной скорости деградации
-    #         d_c0 = self.get_degradation_rate(self.data_ttf[temperature], temperature)
-    #         d_c = d_c0 * np.exp(-self.e_a / (self.K_BOLZ * temperature))
-    #         model_data[temperature] = self.c_0 * (1 + d_c * time)
-    #     return model_data
